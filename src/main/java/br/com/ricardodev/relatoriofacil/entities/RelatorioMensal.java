@@ -9,19 +9,21 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_relatoro_mensal")
+@Table(name = "tb_relatorio_mensal")
 public class RelatorioMensal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer mes;
-    private  Integer ano;
+    private Integer ano;
+    @Enumerated(EnumType.STRING)
     private StatusRelatorio statusRelatorio;
     private BigDecimal totalMonitoramento;
     private BigDecimal totalEscoltaSaida;
@@ -29,4 +31,15 @@ public class RelatorioMensal {
     private BigDecimal valorTotal;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
+    @ManyToOne
+    @JoinColumn(name = "prestadora_id")
+    private Prestadora prestadora;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 }
