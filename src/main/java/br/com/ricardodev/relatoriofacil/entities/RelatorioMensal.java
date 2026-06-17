@@ -1,0 +1,32 @@
+package br.com.ricardodev.relatoriofacil.entities;
+
+import br.com.ricardodev.relatoriofacil.enums.StatusRelatorio;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "tb_relatoro_mensal")
+public class RelatorioMensal {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Integer mes;
+    private  Integer ano;
+    private StatusRelatorio statusRelatorio;
+    private BigDecimal totalMonitoramento;
+    private BigDecimal totalEscoltaSaida;
+    private BigDecimal totalEscoltaEntrada;
+    private BigDecimal valorTotal;
+    private LocalDateTime criadoEm;
+    private LocalDateTime atualizadoEm;
+}
