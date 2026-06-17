@@ -21,7 +21,6 @@ public class Escolta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated(EnumType.STRING)
     private TipoEscolta tipoEscolta;
     private LocalDate dataService;
     private LocalTime horario;

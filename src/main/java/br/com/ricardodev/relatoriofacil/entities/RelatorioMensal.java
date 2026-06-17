@@ -22,7 +22,6 @@ public class RelatorioMensal {
     private Long id;
     private Integer mes;
     private  Integer ano;
-    @Enumerated(EnumType.STRING)
     private StatusRelatorio statusRelatorio;
     private BigDecimal totalMonitoramento;
     private BigDecimal totalEscoltaSaida;
