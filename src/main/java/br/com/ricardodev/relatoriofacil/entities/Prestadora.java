@@ -23,5 +23,6 @@ public class Prestadora {
     private String endereco;
     private String telefone;
     private String email;
+    private Boolean ativo;
 
 }
