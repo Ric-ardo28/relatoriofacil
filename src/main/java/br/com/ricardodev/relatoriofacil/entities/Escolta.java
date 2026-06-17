@@ -1,29 +1,31 @@
 package br.com.ricardodev.relatoriofacil.entities;
 
-import br.com.ricardodev.relatoriofacil.enums.PerfilUsuario;
+import br.com.ricardodev.relatoriofacil.enums.TipoEscolta;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_usuario")
-public class Usuario {
+@Table(name = "tb_escolta")
+public class Escolta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String email;
-    private String senha;
     @Enumerated(EnumType.STRING)
-    private PerfilUsuario perfilUsuario;
-    private Boolean ativo;
-    private LocalDateTime criadoEm;
+    private TipoEscolta tipoEscolta;
+    private LocalDate dataService;
+    private LocalTime horario;
+    private BigDecimal valor;
+    private String observacao;
 
 }
