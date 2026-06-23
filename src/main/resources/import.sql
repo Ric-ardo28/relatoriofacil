@@ -1,0 +1,3 @@
+INSERT INTO tb_cliente (nome, cnpj, telefone, email, ativo) VALUES ('Empresa Alfa LTDA', '12345678000199', '(11) 99999-1111', 'contato@empresaalfa.com', true);
+INSERT INTO tb_cliente (nome, cnpj, telefone, email, ativo) VALUES ('Transportes Beta LTDA', '98765432000188', '(11) 98888-2222', 'contato@transportesbeta.com', true);
+INSERT INTO tb_cliente (nome, cnpj, telefone, email, ativo) VALUES ('Comercial Gama LTDA', '45678912000177', '(11) 97777-3333', 'contato@comercialgama.com', false);
