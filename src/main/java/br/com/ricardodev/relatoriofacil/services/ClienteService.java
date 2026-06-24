@@ -27,5 +27,22 @@ public class ClienteService {
         return new ClienteDTO(cliente);
     }
 
+    @Transactional
+    public ClienteDTO insert(ClienteDTO clienteDTO) {
+        Cliente entity = new Cliente();
+        copiarDadosDTO(clienteDTO, entity);
+        entity = clienteRepository.save(entity);
+
+        return new ClienteDTO(entity);
+    }
+
+    private void copiarDadosDTO(ClienteDTO clienteDTO, Cliente entity) {
+        entity.setNome(clienteDTO.getNome());
+        entity.setCnpj(clienteDTO.getCnpj());
+        entity.setTelefone(clienteDTO.getTelefone());
+        entity.setEmail(clienteDTO.getEmail());
+        entity.setAtivo(clienteDTO.getAtivo());
+    }
+
 
 }
