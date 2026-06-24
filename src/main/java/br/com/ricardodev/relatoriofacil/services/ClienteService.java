@@ -38,7 +38,7 @@ public class ClienteService {
 
     @Transactional
     public ClienteDTO update(Long id, ClienteDTO clienteDTO) {
-        Cliente entity = new Cliente();
+        Cliente entity = clienteRepository.getReferenceById(id);
         copiarDadosDTO(clienteDTO, entity);
         entity = clienteRepository.save(entity);
 
