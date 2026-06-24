@@ -1,6 +1,5 @@
 package br.com.ricardodev.relatoriofacil.entities;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
