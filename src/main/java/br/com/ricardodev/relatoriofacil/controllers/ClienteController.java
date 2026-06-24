@@ -19,23 +19,36 @@ public class ClienteController {
     private final ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<Page<ClienteDTO>> findAll(Pageable pageable){
+    public ResponseEntity<Page<ClienteDTO>> findAll(Pageable pageable) {
         Page<ClienteDTO> dto = clienteService.findAll(pageable);
         return ResponseEntity.ok(dto);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ClienteDTO> findById(@PathVariable Long id){
+    public ResponseEntity<ClienteDTO> findById(@PathVariable Long id) {
         ClienteDTO clienteDTO = clienteService.findById(id);
         return ResponseEntity.ok(clienteDTO);
 
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> insert(@RequestBody ClienteDTO clienteDTO){
+    public ResponseEntity<ClienteDTO> insert(@RequestBody ClienteDTO clienteDTO) {
         clienteDTO = clienteService.insert(clienteDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(clienteDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(clienteDTO);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ClienteDTO> update(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+        clienteDTO = clienteService.update(id, clienteDTO);
+        return ResponseEntity.ok(clienteDTO);
+
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        clienteService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 

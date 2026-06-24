@@ -36,6 +36,21 @@ public class ClienteService {
         return new ClienteDTO(entity);
     }
 
+    @Transactional
+    public ClienteDTO update(Long id, ClienteDTO clienteDTO) {
+        Cliente entity = new Cliente();
+        copiarDadosDTO(clienteDTO, entity);
+        entity = clienteRepository.save(entity);
+
+        return new ClienteDTO(entity);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        clienteRepository.deleteById(id);
+    }
+
+
     private void copiarDadosDTO(ClienteDTO clienteDTO, Cliente entity) {
         entity.setNome(clienteDTO.getNome());
         entity.setCnpj(clienteDTO.getCnpj());
