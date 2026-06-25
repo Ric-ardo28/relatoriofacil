@@ -17,8 +17,8 @@ public class ClienteService {
 
     @Transactional(readOnly = true)
     public Page<ClienteDTO> findAll(Pageable pageable) {
-        Page<Cliente> cliente = clienteRepository.findAll(pageable);
-        return cliente.map(ClienteDTO::new);
+        Page<Cliente> clientes = clienteRepository.findAll(pageable);
+        return clientes.map(ClienteDTO::new);
     }
 
     @Transactional(readOnly = true)
