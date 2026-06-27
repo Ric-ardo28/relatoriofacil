@@ -37,6 +37,7 @@ public class PrestadoraService {
         return new PrestadoraDTO(entity);
     }
 
+    @Transactional
     public PrestadoraDTO update(Long id, PrestadoraDTO prestadoraDTO) {
         Prestadora entity = prestadoraRepository.getReferenceById(id);
         copiarDadosDTO(prestadoraDTO, entity);
@@ -44,13 +45,14 @@ public class PrestadoraService {
         return new PrestadoraDTO(entity);
     }
 
+    @Transactional
     public void delete(Long id) {
         prestadoraRepository.deleteById(id);
     }
 
 
     private void copiarDadosDTO(PrestadoraDTO prestadoraDTO, Prestadora entity) {
-        entity.setId(prestadoraDTO.getId());
+
         entity.setRazaoSocial(prestadoraDTO.getRazaoSocial());
         entity.setNomeFantasia(prestadoraDTO.getNomeFantasia());
         entity.setCnpj(prestadoraDTO.getCnpj());
