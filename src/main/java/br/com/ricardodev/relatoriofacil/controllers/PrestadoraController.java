@@ -39,13 +39,13 @@ public class PrestadoraController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<PrestadoraDTO> update(@PathVariable Long id, @RequestBody PrestadoraDTO prestadoraDTO){
+    public ResponseEntity<PrestadoraDTO> update(@PathVariable Long id, @RequestBody PrestadoraDTO prestadoraDTO) {
         prestadoraDTO = prestadoraService.update(id, prestadoraDTO);
         return ResponseEntity.ok(prestadoraDTO);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         prestadoraService.delete(id);
         return ResponseEntity.noContent().build();
     }
