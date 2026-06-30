@@ -3,6 +3,7 @@ package br.com.ricardodev.relatoriofacil.services;
 import br.com.ricardodev.relatoriofacil.dtos.ClienteDTO;
 import br.com.ricardodev.relatoriofacil.entities.Cliente;
 import br.com.ricardodev.relatoriofacil.repositories.ClienteRepository;
+import br.com.ricardodev.relatoriofacil.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +24,7 @@ public class ClienteService {
 
     @Transactional(readOnly = true)
     public ClienteDTO findById(Long id) {
-        Cliente cliente = clienteRepository.findById(id).get();
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         return new ClienteDTO(cliente);
     }
 
