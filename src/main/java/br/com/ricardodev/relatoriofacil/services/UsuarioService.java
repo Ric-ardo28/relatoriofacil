@@ -4,6 +4,7 @@ import br.com.ricardodev.relatoriofacil.dtos.UsuarioDTO;
 import br.com.ricardodev.relatoriofacil.dtos.UsuarioInsertDTO;
 import br.com.ricardodev.relatoriofacil.entities.Usuario;
 import br.com.ricardodev.relatoriofacil.repositories.UsuarioRepository;
+import br.com.ricardodev.relatoriofacil.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +28,7 @@ public class UsuarioService {
 
     @Transactional(readOnly = true)
     public UsuarioDTO findById(Long id) {
-        Usuario usuario = usuarioRepository.findById(id).get();
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         return new UsuarioDTO(usuario);
     }
 

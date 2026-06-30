@@ -3,6 +3,7 @@ package br.com.ricardodev.relatoriofacil.services;
 import br.com.ricardodev.relatoriofacil.dtos.PrestadoraDTO;
 import br.com.ricardodev.relatoriofacil.entities.Prestadora;
 import br.com.ricardodev.relatoriofacil.repositories.PrestadoraRepository;
+import br.com.ricardodev.relatoriofacil.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,7 @@ public class PrestadoraService {
 
     @Transactional(readOnly = true)
     public PrestadoraDTO findById(Long id) {
-        Prestadora prestadora = prestadoraRepository.findById(id).get();
+        Prestadora prestadora = prestadoraRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         return new PrestadoraDTO(prestadora);
     }
 
