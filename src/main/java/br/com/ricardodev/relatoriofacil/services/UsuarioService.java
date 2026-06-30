@@ -43,7 +43,7 @@ public class UsuarioService {
 
     @Transactional
     public UsuarioDTO update(Long id, UsuarioDTO usuarioDTO) {
-        Usuario entity = usuarioRepository.getReferenceById(id);
+        Usuario entity = usuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado"));
         copiarDadosDTO(usuarioDTO, entity);
         entity = usuarioRepository.save(entity);
         return new UsuarioDTO(entity);

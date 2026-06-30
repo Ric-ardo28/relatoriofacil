@@ -40,7 +40,7 @@ public class PrestadoraService {
 
     @Transactional
     public PrestadoraDTO update(Long id, PrestadoraDTO prestadoraDTO) {
-        Prestadora entity = prestadoraRepository.getReferenceById(id);
+        Prestadora entity = prestadoraRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         copiarDadosDTO(prestadoraDTO, entity);
         entity = prestadoraRepository.save(entity);
         return new PrestadoraDTO(entity);

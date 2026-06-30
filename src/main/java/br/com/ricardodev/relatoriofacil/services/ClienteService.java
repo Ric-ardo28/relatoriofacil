@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+
 @RequiredArgsConstructor
 @Service
 public class ClienteService {
@@ -39,7 +41,7 @@ public class ClienteService {
 
     @Transactional
     public ClienteDTO update(Long id, ClienteDTO clienteDTO) {
-        Cliente entity = clienteRepository.getReferenceById(id);
+        Cliente entity = clienteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
         copiarDadosDTO(clienteDTO, entity);
         entity = clienteRepository.save(entity);
 
