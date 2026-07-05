@@ -6,6 +6,39 @@ O objetivo do projeto é substituir o preenchimento manual mensal de planilhas p
 
 ---
 
+## Protótipo no Figma
+
+Antes da implementação do frontend, foi criado um protótipo visual no Figma para planejar as principais telas do sistema, validar o fluxo de uso e servir como referência para o desenvolvimento da interface.
+
+🔗 [Acessar protótipo no Figma](https://www.figma.com/design/iANzs6iPAso4qxvkIjWXdu)
+
+### Telas previstas no protótipo
+
+- Login
+- Dashboard
+- Listagem de relatórios mensais
+- Criação de relatório mensal
+- Cadastro de clientes
+- Cadastro de prestadoras
+- Versão responsiva para celular
+
+### Sugestão para documentação visual
+
+As imagens exportadas do Figma podem ser salvas futuramente na pasta:
+
+```text
+docs/
+└── figma/
+    ├── login.png
+    ├── dashboard.png
+    ├── relatorios.png
+    └── criar-relatorio.png
+```
+
+Essa organização ajuda a manter o projeto mais profissional para portfólio, mostrando planejamento visual, documentação e implementação.
+
+---
+
 ## Sobre o projeto
 
 Atualmente, relatórios mensais de transporte e monitoramento precisam ser preenchidos manualmente em planilhas, alterando mês, datas, motoristas, placas, valores e totais.
@@ -726,4 +759,3 @@ Primeira etapa: construção do backend com Java e Spring Boot.
 ## Autor
 
 Desenvolvido por Ricardo Rodrigues Santana como projeto pessoal de estudo e portfólio.
-
