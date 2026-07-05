@@ -4,11 +4,14 @@ import br.com.ricardodev.relatoriofacil.dtos.UsuarioDTO;
 import br.com.ricardodev.relatoriofacil.dtos.UsuarioInsertDTO;
 import br.com.ricardodev.relatoriofacil.entities.Usuario;
 import br.com.ricardodev.relatoriofacil.repositories.UsuarioRepository;
+import br.com.ricardodev.relatoriofacil.services.exceptions.DatabaseException;
 import br.com.ricardodev.relatoriofacil.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -49,9 +52,18 @@ public class UsuarioService {
         return new UsuarioDTO(entity);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
-        usuarioRepository.deleteById(id);
+       if(!usuarioRepository.existsById(id)) {
+           throw new ResourceNotFoundException("Recurso não encontrado");
+
+       }
+       try {
+           usuarioRepository.deleteById(id);
+       }
+       catch (DataIntegrityViolationException e){
+           throw new DatabaseException("Falha de integridade referencial");
+       }
     }
 
     private void copiarDadosDTO(UsuarioDTO usuarioDTO, Usuario entity) {
