@@ -21,14 +21,14 @@ public class ClienteDTO {
     private String nome;
 
     @NotBlank(message = "Campo obrigatório")
-    @CNPJ(message = "CNPJ invalido")
+    @CNPJ(message = "CNPJ invalído")
     private String cnpj;
 
     @NotBlank(message = "Campo obrigatório")
     @Pattern(regexp = "\\d{8,14}", message = "Telefone deve conter entre 8 e 14 números")
     private String telefone;
 
-    @Email(message = "Email invalido")
+    @Email(message = "Email invalído")
     @NotBlank(message = "Campo obrigatório")
     private String email;
 
