@@ -3,11 +3,14 @@ package br.com.ricardodev.relatoriofacil.services;
 import br.com.ricardodev.relatoriofacil.dtos.ClienteDTO;
 import br.com.ricardodev.relatoriofacil.entities.Cliente;
 import br.com.ricardodev.relatoriofacil.repositories.ClienteRepository;
+import br.com.ricardodev.relatoriofacil.services.exceptions.DatabaseException;
 import br.com.ricardodev.relatoriofacil.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -48,9 +51,17 @@ public class ClienteService {
         return new ClienteDTO(entity);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
-        clienteRepository.deleteById(id);
+        if (!clienteRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Recurso não encontrado");
+
+        }
+        try {
+            clienteRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Falha de integridade referencial");
+        }
     }
 
 

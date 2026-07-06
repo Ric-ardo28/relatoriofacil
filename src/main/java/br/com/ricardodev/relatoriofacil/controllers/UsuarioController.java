@@ -3,6 +3,7 @@ package br.com.ricardodev.relatoriofacil.controllers;
 import br.com.ricardodev.relatoriofacil.dtos.UsuarioDTO;
 import br.com.ricardodev.relatoriofacil.dtos.UsuarioInsertDTO;
 import br.com.ricardodev.relatoriofacil.services.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +34,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> insert(@RequestBody UsuarioInsertDTO usuarioInsertDTO) {
+    public ResponseEntity<UsuarioDTO> insert(@Valid @RequestBody UsuarioInsertDTO usuarioInsertDTO) {
         UsuarioDTO usuarioDTO = usuarioService.insert(usuarioInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuarioDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(usuarioDTO);
@@ -41,7 +42,7 @@ public class UsuarioController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UsuarioDTO> update(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<UsuarioDTO> update(@PathVariable Long id,@Valid @RequestBody UsuarioDTO usuarioDTO) {
         usuarioDTO = usuarioService.update(id, usuarioDTO);
         return ResponseEntity.ok(usuarioDTO);
     }

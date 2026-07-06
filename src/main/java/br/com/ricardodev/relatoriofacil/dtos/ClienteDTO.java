@@ -2,10 +2,7 @@ package br.com.ricardodev.relatoriofacil.dtos;
 
 import br.com.ricardodev.relatoriofacil.entities.Cliente;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +25,7 @@ public class ClienteDTO {
     private String cnpj;
 
     @NotBlank(message = "Campo obrigatório")
-    @Size(min = 8, message = "Telefone com no mínimo 8 números")
+    @Pattern(regexp = "\\d{8,14}", message = "Telefone deve conter entre 8 e 14 números")
     private String telefone;
 
     @Email(message = "Email invalido")

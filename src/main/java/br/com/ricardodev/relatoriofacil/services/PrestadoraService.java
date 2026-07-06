@@ -3,11 +3,14 @@ package br.com.ricardodev.relatoriofacil.services;
 import br.com.ricardodev.relatoriofacil.dtos.PrestadoraDTO;
 import br.com.ricardodev.relatoriofacil.entities.Prestadora;
 import br.com.ricardodev.relatoriofacil.repositories.PrestadoraRepository;
+import br.com.ricardodev.relatoriofacil.services.exceptions.DatabaseException;
 import br.com.ricardodev.relatoriofacil.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -46,9 +49,17 @@ public class PrestadoraService {
         return new PrestadoraDTO(entity);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
-        prestadoraRepository.deleteById(id);
+        if (!prestadoraRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Recurso não encontrado");
+
+        }
+        try {
+            prestadoraRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Falha de integridade referencial");
+        }
     }
 
 

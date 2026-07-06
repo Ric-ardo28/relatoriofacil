@@ -2,6 +2,7 @@ package br.com.ricardodev.relatoriofacil.controllers;
 
 import br.com.ricardodev.relatoriofacil.dtos.PrestadoraDTO;
 import br.com.ricardodev.relatoriofacil.services.PrestadoraService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class PrestadoraController {
     }
 
     @PostMapping
-    public ResponseEntity<PrestadoraDTO> insert(@RequestBody PrestadoraDTO prestadoraDTO) {
+    public ResponseEntity<PrestadoraDTO> insert(@Valid @RequestBody PrestadoraDTO prestadoraDTO) {
         prestadoraDTO = prestadoraService.insert(prestadoraDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(prestadoraDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(prestadoraDTO);
@@ -39,7 +40,7 @@ public class PrestadoraController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<PrestadoraDTO> update(@PathVariable Long id, @RequestBody PrestadoraDTO prestadoraDTO) {
+    public ResponseEntity<PrestadoraDTO> update(@PathVariable Long id,@Valid @RequestBody PrestadoraDTO prestadoraDTO) {
         prestadoraDTO = prestadoraService.update(id, prestadoraDTO);
         return ResponseEntity.ok(prestadoraDTO);
     }
