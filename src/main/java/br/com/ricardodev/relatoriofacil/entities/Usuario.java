@@ -26,4 +26,8 @@ public class Usuario {
     private Boolean ativo;
     private LocalDateTime criadoEm;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "prestadora_id", nullable = false)
+    private Prestadora prestadora;
+
 }
